@@ -16,6 +16,15 @@ steps:
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceEndpoint: 'aks'
     namespace: 'default'
+    command: 'delete'
+    arguments: 'cronjob busybox'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'aks'
+    namespace: 'default'
     command: 'run'
     arguments: |
       busybox --schedule="*/1 * * * *" --env VAR1=val1 --env VAR2=val2 --image=busybox --restart=Never -- sh   
